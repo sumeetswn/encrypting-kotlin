@@ -4,9 +4,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     id("org.jetbrains.dokka")
-    id("io.github.gradle-nexus.publish-plugin")
     `maven-publish`
-    signing
 }
 
 group = "dev.sublab"
@@ -97,29 +95,7 @@ publishing {
                         organizationUrl.set("https://sublab.dev")
                     }
                 }
-                scm {
-                    connection.set("scm:git:https://github.com/sublabdev/${rootProject.name}.git")
-                    developerConnection.set("scm:git:https://github.com/sublabdev/${rootProject.name}.git")
-                    url.set("https://github.com/sublabdev/${rootProject.name}")
-                }
             }
         }
     }
-}
-
-nexusPublishing {
-    repositories {
-        sonatype {
-            packageGroup.set("dev.sublab")
-            username.set(providers.gradleProperty("ossrhUsername").orNull)
-            password.set(providers.gradleProperty("ossrhPassword").orNull)
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
-        }
-    }
-}
-
-signing {
-    useGpgCmd()
-    sign(publishing.publications["mavenJava"])
 }
