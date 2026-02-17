@@ -111,8 +111,8 @@ nexusPublishing {
     repositories {
         sonatype {
             packageGroup.set("dev.sublab")
-            username.set(extra.get("ossrhUsername") as? String)
-            password.set(extra.get("ossrhPassword") as? String)
+            username.set(providers.gradleProperty("ossrhUsername").orNull)
+            password.set(providers.gradleProperty("ossrhPassword").orNull)
             nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
             snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
         }

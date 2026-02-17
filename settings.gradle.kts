@@ -12,8 +12,8 @@ pluginManagement {
         signing
     }
 
-    val ossrhUsername: String by settings
-    val ossrhPassword: String by settings
+    val ossrhUsername = providers.gradleProperty("ossrhUsername").getOrElse("")
+    val ossrhPassword = providers.gradleProperty("ossrhPassword").getOrElse("")
     extra.set("ossrhUsername", ossrhUsername)
     extra.set("ossrhPassword", ossrhPassword)
 }
